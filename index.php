@@ -1,3 +1,4 @@
+<?php include 'sendemail.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -378,10 +379,6 @@
 
         </section>
 
-            <!--php file start-->
-            <?php include 'sendemail.php'; ?>
-            <!--php file end-->
-
             <!--alert message start-->
             <?php echo $alert; ?>
             <!--alert message end-->
@@ -448,8 +445,18 @@
     }
     </script>
     <script src="main.js">
+
+
     </script>
 
 
 </body>
+
+
+
+
+
+
+
+
 </html>
