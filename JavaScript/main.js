@@ -1,45 +1,47 @@
-/*MENU SHOW Y HIDDEN*/
+/* ==================== MOBILE MENU TOGGLE ==================== */
 const navMenu = document.getElementById('nav-menu'),
-    toggleMenu = document.getElementById('nav-toggle'),
-    closeMenu = document.getElementById('nav-close')
+      navToggle = document.getElementById('nav-toggle'),
+      navClose = document.getElementById('nav-close');
 
-//SHOW
-toggleMenu.addEventListener('click', ()=>{
-    navMenu.classList.toggle('show')
-})
-
-//HIDDEN
-closeMenu.addEventListener('click', ()=>{
-    navMenu.classList.remove('show')
-})
-
-/*REMOVE MENU*/
-const navLink = document.querySelectorAll('.nav__link')
-
-function linkAction(){
-    navMenu.classList.remove('show')
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.add('show-menu');
+    });
 }
-navLink.forEach(n => n.addEventListener('click', linkAction))
 
-/*SCROLL SECTIONS ACTIVE LINK*/
-const sections = document.querySelectorAll('section[id]')
+if (navClose) {
+    navClose.addEventListener('click', () => {
+        navMenu.classList.remove('show-menu');
+    });
+}
 
-window.addEventListener('scroll', scrollActive)
+/* Close mobile menu when clicking a link */
+const navLinks = document.querySelectorAll('.nav__link');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('show-menu');
+    });
+});
 
-function scrollActive(){
-    const scrollY = window.pageYOffset
+/* ==================== ACTIVE LINK ON SCROLL ==================== */
+const sections = document.querySelectorAll('section[id]');
 
-    sections.forEach(current =>{
-        const sectionHeight = current.offsetHeight
-        const sectionTop = current.offsetTop - 50
-        sectionId = current.getAttribute('id')
+function scrollActive() {
+    const scrollY = window.pageYOffset;
 
-        if(scrollY > sectionTop && scrollY <= sectionTop +sectionHeight){
-            document.querySelector('.nav__menu a[href*='+ sectionId +']').classList.add('active')
-        }else{
-            document.querySelector('.nav__menu a[href*='+ sectionId +']').classList.remove('active')
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 90;
+        const sectionId = current.getAttribute('id');
+        const navLink = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+
+        if (navLink) {
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLink.classList.add('active-link');
+            } else {
+                navLink.classList.remove('active-link');
+            }
         }
-
-    })
+    });
 }
-
+window.addEventListener('scroll', scrollActive);
